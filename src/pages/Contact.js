@@ -3,11 +3,10 @@ import NavBar from '../components/Navbar/NavBar';
 import Footer from '../components/Footer';
 import {useDocTitle} from '../components/CustomHook';
 import axios from 'axios';
-// import emailjs from 'emailjs-com';
 import Notiflix from 'notiflix';
 
 const Contact = () => {
-    useDocTitle('MLD | Molad e Konsult - Send us a message')
+    useDocTitle('Biogascover | Send us a message')
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
@@ -38,12 +37,24 @@ const Contact = () => {
         fData.append('phone_number', phone)
         fData.append('message', message)
 
+        let data = {
+            service_id: 'service_sk4y8q9',
+            template_id: 'template_9w5p8uv',
+            user_id: '2y7IY3UVjuAmQFqkw',
+            template_params: {
+                'from_name': firstName + ' ' + lastName,
+                'from_phone': phone,
+                'from_email': email,
+                'message': message,
+            }
+        };
+
         axios({
             method: "post",
-            url: process.env.REACT_APP_CONTACT_API,
-            data: fData,
+            url: 'https://api.emailjs.com/api/v1.0/email/send',
+            data,
             headers: {
-                'Content-Type':  'multipart/form-data'
+                'Content-Type':  'application/json'
             }
         })
         .then(function (response) {
@@ -87,7 +98,7 @@ const Contact = () => {
 
                     <div className="w-full bg-white p-8 my-4 md:px-12 lg:w-9/12 lg:pl-20 lg:pr-40 mr-auto rounded-2xl shadow-2xl">
                         <div className="flex">
-                            <h1 className="font-bold text-center lg:text-left text-blue-900 uppercase text-4xl">Send us a message</h1>
+                            <h1 className="font-bold text-center lg:text-left text-[#307539] uppercase text-4xl">Send us a message</h1>
                         </div>
                         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 mt-5">
                                 <div>
@@ -164,7 +175,7 @@ const Contact = () => {
                             }
                         </div>
                         <div className="my-2 w-1/2 lg:w-2/4">
-                            <button type="submit" id="submitBtn" className="uppercase text-sm font-bold tracking-wide bg-gray-500 hover:bg-blue-900 text-gray-100 p-3 rounded-lg w-full 
+                            <button type="submit" id="submitBtn" className="uppercase text-sm font-bold tracking-wide bg-gray-500 hover:bg-[#307539]  text-gray-100 p-3 rounded-lg w-full 
                                     focus:outline-none focus:shadow-outline">
                                 Send Message
                             </button>
@@ -172,16 +183,12 @@ const Contact = () => {
                 </div>
                 </form>
                         <div
-                            className="w-full  lg:-mt-96 lg:w-2/6 px-8 py-6 ml-auto bg-blue-900 rounded-2xl">
+                            className="w-full  lg:-mt-96 lg:w-2/6 px-8 py-6 ml-auto bg-[#307539] rounded-2xl">
                             <div className="flex flex-col text-white">
                                 
                                 <div className="flex my-4 w-2/3 lg:w-3/4">
                                     <div className="flex flex-col">
                                         <i className="fas fa-map-marker-alt pt-2 pr-2" />
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <h2 className="text-2xl">Office Address</h2>
-                                        <p className="text-gray-400">Ilo Awela, Ota, Ogun State</p>
                                     </div>
                                 </div>
                     
@@ -192,11 +199,11 @@ const Contact = () => {
 
                         <div className="flex flex-col">
                         <h2 className="text-2xl">Call Us</h2>
-                        <p className="text-gray-400">Tel: 08055384406</p>
+                        <p className="text-gray-400">Tel: xxx-xxx-xxx</p>
                         
                             <div className='mt-5'>
                                 <h2 className="text-2xl">Send an E-mail</h2>
-                                <p className="text-gray-400">info@mld.ng</p>
+                                <p className="text-gray-400">xxxx@xxxxx.com</p>
                             </div>
                        
                         </div>
